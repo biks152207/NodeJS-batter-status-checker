@@ -109,4 +109,6 @@ var server = http.createServer(function(request, response){
       }
     })
   }
-}).listen(PORT);
+}).listen(PORT, function(){
+  console.log('Sever listening on port ' + PORT);
+});
