@@ -26,13 +26,13 @@ function getConfigForCurrentOS(){
     case 'linux':
       return {
         batteryCommand: 'upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|time to empty|to full|percentage"',
-        batteryProcess: batteryProcessForLinux
+        batteryProcess: batteryProcessForAll
       }
       break;
     case 'darwin':
       return {
         batteryCommand: 'pmset -g batt | egrep "([0-9]+\%).*" -o',
-        batteryProcess : batteryProcessForMac
+        batteryProcess : batteryProcessForAll
       }
       break;
     case 'win32':
@@ -71,8 +71,7 @@ function jsonResponseWrapper(response, data) {
 var onBatteryInfo = jsonResponseWrapper;
 
 // Battery status parser
-function batteryProcessForMac(stdout){
-  console.log('here we are');
+function batteryProcessForAll(stdout){
   var battery = stdout.split(';').map(trimParam);
   return battery;
 }
